@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cross Compiler Platform</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Experiment 10</p>
+        <h1>Cross Compiler Platform</h1>
+      </div>
+      <div class="target-switch" aria-label="Target platform">
+        <button class="target active" data-target="c">C</button>
+        <button class="target" data-target="arm">ARM</button>
+        <button class="target" data-target="riscv">RISC-V</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="left-pane" aria-label="Compiler input and output">
+        <div class="editor-panel">
+          <div class="panel-title">
+            <span>Source Program</span>
+            <div class="button-row">
+              <button id="sampleBtn" class="ghost">Sample</button>
+              <button id="compileBtn" class="primary">Compile</button>
+            </div>
+          </div>
+          <textarea id="sourceInput" spellcheck="false"></textarea>
+          <p class="hint">Language supports <code>int</code>, assignment, arithmetic, <code>print</code>, and semicolon-terminated statements.</p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Compilation results">
+          <button class="tab active" data-view="tokens">Tokens</button>
+          <button class="tab" data-view="syntax">Syntax</button>
+          <button class="tab" data-view="semantic">Semantic</button>
+          <button class="tab" data-view="ast">AST</button>
+          <button class="tab" data-view="tac">TAC</button>
+          <button class="tab" data-view="optimized">Optimized</button>
+          <button class="tab" data-view="targetCode">Target Code</button>
+          <button class="tab" data-view="run">Run</button>
+          <button class="tab" data-view="writeup">Write-up</button>
+        </div>
+
+        <section class="output-shell">
+          <div id="outputTitle" class="output-title">Tokens</div>
+          <div id="output" class="output"></div>
+        </section>
+      </section>
+
+      <aside class="right-pane" aria-label="Compiler process visualization">
+        <section class="flow-panel">
+          <div class="panel-title">
+            <span>Compiler Flow</span>
+            <span id="statusBadge" class="badge">Ready</span>
+          </div>
+          <div class="flow-graph" id="flowGraph">
+            <div class="flow-node active" data-step="lexical">
+              <span>1</span>
+              <strong>Lexical</strong>
+              <small>characters to tokens</small>
+            </div>
+            <div class="flow-edge"></div>
+            <div class="flow-node" data-step="syntax">
+              <span>2</span>
+              <strong>Syntax</strong>
+              <small>tokens to grammar</small>
+            </div>
+            <div class="flow-edge"></div>
+            <div class="flow-node" data-step="semantic">
+              <span>3</span>
+              <strong>Semantic</strong>
+              <small>symbol table checks</small>
+            </div>
+            <div class="flow-edge"></div>
+            <div class="flow-node" data-step="ast">
+              <span>4</span>
+              <strong>AST</strong>
+              <small>program tree</small>
+            </div>
+            <div class="flow-edge"></div>
+            <div class="flow-node" data-step="tac">
+              <span>5</span>
+              <strong>TAC</strong>
+              <small>three address code</small>
+            </div>
+            <div class="flow-edge"></div>
+            <div class="flow-node" data-step="optimized">
+              <span>6</span>
+              <strong>Optimize</strong>
+              <small>fold constants</small>
+            </div>
+            <div class="flow-edge"></div>
+            <div class="flow-node" data-step="targetCode">
+              <span>7</span>
+              <strong>Target</strong>
+              <small>C / ARM / RISC-V</small>
+            </div>
+          </div>
+        </section>
+
+        <section class="machine-panel">
+          <div class="panel-title">
+            <span>Live Process</span>
+            <button id="stepBtn" class="ghost">Step</button>
+          </div>
+          <div class="compiler-machine">
+            <div class="scanner-track">
+              <div id="scanner" class="scanner"></div>
+              <div id="sourceStream" class="source-stream"></div>
+            </div>
+            <div id="processLog" class="process-log"></div>
+          </div>
+        </section>
+
+        <section class="symbol-card">
+          <div class="panel-title">
+            <span>Symbol Table</span>
+          </div>
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Value</th></tr>
+            </thead>
+            <tbody id="symbolBody"></tbody>
+          </table>
+        </section>
+      </aside>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build outputs
+*.o
+*.exe
+*.out
+lex.yy.c
+parser.tab.c
+parser.tab.h
+cross_compiler
+
+# LaTeX generated files
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Codex / deployment metadata
+.openai/
+.sites-runtime/
+.sites-checkout/
